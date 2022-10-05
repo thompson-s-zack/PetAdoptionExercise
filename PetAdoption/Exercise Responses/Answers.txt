@@ -1,0 +1,19 @@
+﻿Further Adoption Implementation Considerations:
+Some thoughts on other considerations for other parts of an adoption application, or components left out of this implementation.
+The Pet object would likely need to be extended to contain additional info related to time they've been at the shelter (or just when they arrived),
+as well as cost for adoption. Assuming they aren't just deleted upon adoption from, there would be more considerations to a history, like when they
+were adopted, fostering history, or if they return to this or another animal shelter.
+More models would also be desired for the people doing the adoption, contact information, fostering history, and any past adoptions.
+Further pets' model(s) may be extended to include "requirements" for adoption, such as the adopter having a yard, or having
+a history of pet ownership. Ideally the person model described above could be used to not just show pets by filters like we already have, but also matching
+pet adoption requirements to adopter persons' credentials.
+
+Testing Methodology
+For testing, we could ease some of thios burden by introducing interfaces to make it easier to stub out/mock certain components to better isolate
+the tested functionality. For example, instead of the one static method we have for parsing the bulk data, maye there's a parser interface that has
+various implementations for different bulk sources, then whe we had tests for the driver application it'd be easier to mock out the data ingestion portion.
+A similar idea could be aplpied to the filtering, which likewise we would probably want to refactor out of the main driver class in an actual implementation
+of this pet adoption program.
+Thoughts thus far have been more applicable to the unit testing for this operation, we would also likely want to test the application holistically (integration tests).
+For this the mocking is of course less relevant. We'd want a test to invoke the driver program, and go through the paces of ingesting the bulk data and then checking
+the output of applying various filters got expected pets displayed.
